@@ -1,0 +1,22 @@
+---
+# Install Terraform
+#
+# Parameters:
+#
+# terraform_version: 0.12.29-1
+
+- name: Gather the package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
+- name: Install terraform when missing
+  block:
+
+    - name: Add yum repo and packages for terraform
+      ansible.builtin.command: "{{ item }}"
+      with_items:
+        - yum install -y yum-utils
+        - yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+        - yum install -y terraform-{{ terraform_version }}.x86_64
+
+  when: "'terraform' not in ansible_facts.packages"

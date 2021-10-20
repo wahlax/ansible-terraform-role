@@ -1,0 +1,10 @@
+---
+
+dependencies: []
+
+galaxy_info:
+  role_name: terraform
+  author: wahlax
+  description: Terraform install for linux
+  company: WAHLAX LLC
+  license: MIT
